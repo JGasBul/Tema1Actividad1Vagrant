@@ -6,7 +6,6 @@
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 Vagrant.configure("2") do |config|
-config.vm.hostname = "PepeGascó"
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
@@ -25,7 +24,7 @@ config.vm.hostname = "PepeGascó"
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
   # NOTE: This will enable public access to the opened port
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "forwarded_port", guest: 80, host: 8081
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine and only allow access
@@ -65,8 +64,12 @@ config.vm.hostname = "PepeGascó"
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  # config.vm.provision "shell", inline: <<-SHELL
-  #   apt-get update
-  #   apt-get install -y apache2
-  # SHELL
+  config.vm.provision "shell", inline: <<-SHELL
+    apt-get -y update
+    apt-get install -y apache2
+    mkdir /vagrant/www
+    cp /var/www/index.html /vagrant/www/
+    sudo rm -r /var/www/
+    sudo ln -s /vagrant/www/ /var/
+  SHELL
 end
