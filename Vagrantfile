@@ -14,6 +14,7 @@ Vagrant.configure("2") do |config|
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "hashicorp/precise32"
   config.vm.box_version = "1.0.0"
+  config.vm.hostname = "ubuntu-Pepe"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
